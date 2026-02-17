@@ -39,6 +39,22 @@ Spring Data JDBC
 H2 Database
 PostgreSQL Driver
 
+# Projekt feltöltése githubra és render.com-ra
+
+https://github.com/-ra regisztrálj be.
+
+Github Desktop-t töltsd le. Utána File -> Add local repository-> keresd meg a mappát, ahova az új projektet hoztad létre. -> Add repository -> Create a repoditory -> Töltsd ki az űrlapot. -> Create repository
+
+render.com regisztrálj -> Kösd össze a github fiókoddal.
+
+New -> Web Service -> Válaszd ki a listából a progjekt nevét (animal_shelter)
+Language: Docker
+-> Deploy web service Kb 15 percig eltart a deploy.
+
+## SSH key
+
+Ez alapján hozd létre: https://github.com/settings/ssh/new
+
 # Projekt futtatása
 
 Ha elindítod a java fájlt (AnimalShelterApplication.java), akkor a böngészőbe írd be ezt: http://localhost:8080/actuator
