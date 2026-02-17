@@ -75,9 +75,9 @@ public class AnimalsController {
         animalRepo.save(new Animal(newName, newWeight)); // Jobb oldalt az Animal osztály konstruktorát hívjuk meg.
         response.setStatus(201); // Beállítja a HTTP válasz státuszkódját 201-re, vagyis Created.
 
-        // Ez visszaad egy HTML oldalt. A Spring megkeresi ezt: templates/users/
+        // Ez visszaad egy HTML oldalt. A Spring megkeresi ezt: templates/animals/
         // Átirányítás a listázó oldalra.
-        return "redirect:/users/view";
+        return "redirect:/animals/view";
     }
 
 }
