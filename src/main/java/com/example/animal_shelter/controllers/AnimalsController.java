@@ -60,14 +60,27 @@ public class AnimalsController {
     // Map-be.
     // A newanimal -> Egy kulcs-érték lista.
     // HttpServletResponse response -> Ez a HTTP válasz objektum.
-    public String addAnimal(@RequestParam Map<String, String> newanimal, HttpServletResponse response) {
+    public String addAnimal(@RequestParam Map<String, String> newanimal, Model model, HttpServletResponse response) {
 
         System.out.println("ADD user");
 
         // A html-ben lévő name attribútumra hivatkozunk a jobb oldalon.
         String newName = newanimal.get("name");
-        int newWeight = Integer.parseInt(newanimal.get("weight"));
-        // String newColor = newanimal.get("color");
+        String weightStr = newanimal.get("weight");
+
+        // Ellenőrizzük, hogy a mezők ki vannak-e töltve
+        if (newName == null || newName.isBlank() || weightStr == null || weightStr.isBlank()) {
+            model.addAttribute("error", "Name and weight are required!");
+            return "animals/add"; // vissza a formhoz, hibaüzenettel
+        }
+
+        int newWeight;
+        try {
+            newWeight = Integer.parseInt(weightStr);
+        } catch (NumberFormatException e) {
+            model.addAttribute("error", "Hibás input!");
+            return "animals/add"; // vissza a formhoz, hibaüzenettel
+        }
 
         // Ezzel mentjük az adatbázisba a sort. Kb egy INSERT INTO ...
         // Ez az ORM (Object-Relational Mapping). Az ORM (itt a Spring Data JPA) kezeli
