@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Animal Shelter</title>
+
+        <!--A https://getbootstrap.com/ CDN részről illeszd be az alábbi linket.-->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
+    </head>
+    <!--http://localhost:8080/add.html-->
+
+    <body>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <h1 class="text-center mt-5 mb-4">New Animal</h1>
+
+                    <!--Ez a form elküldi az adatokat a Spring Boot backend /animals/add endpointjára.
+              Az adatbázis kapcsolat a backendben történik:
+                Controller → Service → Repository → Database-->
+                    <form action="/animals/add" method="post">
+                        <div class="mb-3">
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                class="form-control form-control-lg"
+                                placeholder="Name"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <input
+                                type="text"
+                                id="weight"
+                                name="weight"
+                                class="form-control form-control-lg"
+                                placeholder="Weight"
+                            />
+                        </div>
+
+                        <!-- Submit button -->
+
+                        <div class="d-grid gap-2">
+                            <input
+                                class="btn btn-primary"
+                                type="submit"
+                                value="SEND"
+                            />
+                        </div>
+                    </form>
+                    <br />
+
+                    <!--Ezen nézheted meg a felhasználók listáját: 
+    http://localhost:8080/animals/view-->
+
+                    <form action="/animals/view" method="get">
+                        <div class="d-grid gap-2">
+                            <input
+                                class="btn btn-success"
+                                type="submit"
+                                value="Show all animals"
+                            />
+                        </div>
+                    </form>
+                    <br />
+                    <div class="col-md-4">
+                        <a
+                            href="https://github.com/Nagraggini/springboot-render/tree/main"
+                            >Source code</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
