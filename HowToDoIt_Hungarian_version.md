@@ -143,13 +143,13 @@ Ez az egész Dockerfile arra kell, hogy:
 - JAR fájlt készítsen
 - elindítsa egy konténerben
 
-# BootStrap stílus használata
+# Tailwind stílus használata
 
-[BootStrap](https://getbootstrap.com/docs/5.3/layout/grid/)
+[Tailwind](https://tailwindcss.com/docs/animation)
 
-Használhatod a CDN-t a HTML-ben:
+A HTML-ben a head tagbe másold be ezt:
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
 # CI/CD (Continuous Integration / Continuous Deployment) folyamat:
 

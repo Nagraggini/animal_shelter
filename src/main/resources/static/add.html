@@ -4,77 +4,70 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Animal Shelter</title>
+        <!--Tail Wind css-->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Saját CSS -->
+        <link rel="stylesheet" href="css/style.css" />
 
-        <!--A https://getbootstrap.com/ CDN részről illeszd be az alábbi linket.-->
         <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-            crossorigin="anonymous"
+            rel="icon"
+            type="image/svg+xml"
+            href="img/big-wing-butterfly-svgrepo-com.svg"
         />
     </head>
     <!--http://localhost:8080/add.html-->
 
-    <body>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <h1 class="text-center mt-5 mb-4">New Animal</h1>
+    <body class="bg-gray-100 flex justify-center items-center min-h-screen">
+        <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+            <h1 class="text-3xl font-bold text-center mb-6">New Animal</h1>
 
-                    <!--Ez a form elküldi az adatokat a Spring Boot backend /animals/add endpointjára.
-              Az adatbázis kapcsolat a backendben történik:
-                Controller → Service → Repository → Database-->
-                    <form action="/animals/add" method="post">
-                        <div class="mb-3">
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                class="form-control form-control-lg"
-                                placeholder="Name"
-                            />
-                        </div>
-                        <div class="mb-3">
-                            <input
-                                type="text"
-                                id="weight"
-                                name="weight"
-                                class="form-control form-control-lg"
-                                placeholder="Weight"
-                            />
-                        </div>
+            <!--Ez a form elküldi az adatokat a Spring Boot backend /animals/add
+            endpointjára. Az adatbázis kapcsolat a backendben történik:
+            Controller → Service → Repository → Database-->
 
-                        <!-- Submit button -->
+            <form action="/animals/add" method="post" class="space-y-4">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
 
-                        <div class="d-grid gap-2">
-                            <input
-                                class="btn btn-primary"
-                                type="submit"
-                                value="SEND"
-                            />
-                        </div>
-                    </form>
-                    <br />
+                <input
+                    type="number"
+                    name="weight"
+                    placeholder="Weight"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    min="2"
+                    step="1"
+                    max="50"
+                />
 
-                    <!--Ezen nézheted meg a felhasználók listáját: 
-    http://localhost:8080/animals/view-->
+                <input
+                    type="submit"
+                    value="SEND"
+                    class="relative overflow-hidden w-full bg-blue-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-blue-600"
+                />
+            </form>
+            <!--Ezen nézheted meg a felhasználók listáját: http://localhost:8080/animals/view-->
 
-                    <form action="/animals/view" method="get">
-                        <div class="d-grid gap-2">
-                            <input
-                                class="btn btn-success"
-                                type="submit"
-                                value="Show all animals"
-                            />
-                        </div>
-                    </form>
-                    <br />
-                    <div class="col-md-4">
-                        <a href="https://github.com/Nagraggini/animal_shelter"
-                            >Source code</a
-                        >
-                    </div>
-                </div>
+            <div class="mt-4">
+                <form action="/animals/view" method="get">
+                    <input
+                        type="submit"
+                        value="Show all animals"
+                        class="relative overflow-hidden w-full bg-green-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-black-600"
+                    />
+                </form>
+            </div>
+
+            <div class="mt-6 text-center">
+                <a
+                    href="https://github.com/Nagraggini/animal_shelter"
+                    class="text-blue-600 hover:underline"
+                >
+                    Source code
+                </a>
             </div>
         </div>
     </body>

@@ -34,6 +34,10 @@ public class Animal {
 		setWeight(weight);
 	}
 
+	public Animal() {
+
+	}
+
 	// Getterek/setterek
 	// Minden állatról tudjuk a nevét (nem lehet üres) és a súlyát (minimum 2 kg).
 	// A kutyáról tudjuk továbbá a marmagasságát (mimimum 10 cm), a macskáról pedig,
