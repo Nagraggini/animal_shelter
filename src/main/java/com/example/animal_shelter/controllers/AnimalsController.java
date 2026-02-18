@@ -4,6 +4,8 @@ package com.example.animal_shelter.controllers;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ import jakarta.servlet.http.HttpServletResponse;
 // Ez a kontroller figyeli a szervert, és lehetővé teszi, hogy információkat kapjunk a felhasználókról.
 @Controller
 public class AnimalsController {
+
+    // syso helyett:
+    private static final Logger logger = LoggerFactory.getLogger(AnimalsController.class);
 
     @Autowired
     private AnimalRepository animalRepo;
@@ -39,7 +44,7 @@ public class AnimalsController {
     public String getAllAnimals(Model model) {
         // Modell: A Spring MVC-ben a Model egy olyan “csomagoló” objektum, amiben
         // adatokat küldünk a HTML template-nek (Thymeleaf, JSP, stb.).
-        System.out.println("Getting all animals.");
+        logger.info("Getting all animals."); // info szintű log
 
         // Mindegyik állat lekérése az adatbázisból.
         List<Animal> animals = animalRepo.findAll();
@@ -67,7 +72,7 @@ public class AnimalsController {
     // HttpServletResponse response -> Ez a HTTP válasz objektum.
     public String addAnimal(@RequestParam Map<String, String> newanimal, Model model, HttpServletResponse response) {
 
-        System.out.println("ADD animal");
+        logger.info("Add animal.");
 
         // A html-ben lévő name attribútumra hivatkozunk a jobb oldalon.
         String newName = newanimal.get("name");
@@ -83,6 +88,7 @@ public class AnimalsController {
         try {
             newWeight = Integer.parseInt(weightStr);
         } catch (NumberFormatException e) {
+            logger.error("Failed to parse weight: " + weightStr, e);
             model.addAttribute("error", "Hibás input!");
             return "add"; // vissza a formhoz, hibaüzenettel
         }
@@ -95,6 +101,8 @@ public class AnimalsController {
 
         // Ez visszaad egy HTML oldalt. A Spring megkeresi ezt: templates/animals/
         // Átirányítás a listázó oldalra.
+        // Redirect POST után: Jó a (PRG – Post/Redirect/Get), így frissítésnél
+        // nem ismétlődik a POST, nem lesz duplikáció!
         return "redirect:/animals/view";
 
     }

@@ -359,6 +359,36 @@ Database
  ▼  
 HTML response: showAll.html
 
+# Spring Session
+
+Ha nem akarod használni:
+application.properties-be másold be ezt "spring.session.store-type=none"
+
+Ezzel Spring nem próbálja létrehozni vagy használni a spring_session táblát, és nem kapsz hibát a lejárt session-ök törlésekor.
+
+Ha naplózni akarod az adatokat:
+
+Akkor létre kell hozni a táblát az adatbázisban, miután kapcsolódtál hozz a terminálban.
+
+Ezt másold be a terminálba:
+
+CREATE TABLE spring_session (
+primary_id CHAR(36) NOT NULL,
+session_id CHAR(36) NOT NULL,
+creation_time BIGINT NOT NULL,
+last_access_time BIGINT NOT NULL,
+max_inactive_interval INT NOT NULL,
+expiry_time BIGINT NOT NULL,
+principal_name VARCHAR(100),
+CONSTRAINT spring_session_pkey PRIMARY KEY (primary_id)
+);
+
+CREATE UNIQUE INDEX spring_session_ix1 ON spring_session (session_id);
+CREATE INDEX spring_session_ix2 ON spring_session (expiry_time);
+CREATE INDEX spring_session_ix3 ON spring_session (principal_name);
+
+Ezután a Spring Session JDBC automatikusan használni fogja ezt a táblát a session-ök tárolására és lejárt session-ök törlésére.
+
 # Kezdőknek
 
 [Alapok a webprogramozáshoz blogom.](https://nagraggini.github.io/Web-practising-and-fun/Web_Development/Practising/1-HTML%20Practising/2-Blog.html)

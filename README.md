@@ -67,13 +67,13 @@ docker run -p 8080:8080 animal_shelter
 
 ## Endpoints
 
-| Endpoint           | Description                             |
-| ------------------ | --------------------------------------- |
-| `/`                | Main – start of the website             |
-| `/add.html`        | Example static/dynamic page             |
-| `/users/view`      | List of users                           |
-| `/users/add`       | Add new user                            |
-| `/actuator/health` | Health check endpoint (Spring Actuator) |
+| Endpoint           | Method | Description                                |
+| ------------------ | ------ | ------------------------------------------ |
+| `/`                | GET    | Index – start of the website               |
+| `/add.html`        | GET    | Display form to add a new animal           |
+| `/animals/view`    | GET    | List all animals (`showAll.html` template) |
+| `/animals/view`    | POST   | Add a new animal (process form submission) |
+| `/actuator/health` | GET    | Health check endpoint (Spring Actuator)    |
 
 # Technologies
 
