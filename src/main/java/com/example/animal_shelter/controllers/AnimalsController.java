@@ -23,6 +23,11 @@ public class AnimalsController {
     @Autowired
     private AnimalRepository animalRepo;
 
+    @GetMapping("/add.html")
+    public String addPage() {
+        return "add";
+    }
+
     // Ez a metódus akkor fut le, ha a felhasználó HTTP GET kérést küld a
     // /users/view URL-re.
     // A @GetMapping annotáció egy endpointot definiál, amin keresztül a kliens
@@ -54,7 +59,7 @@ public class AnimalsController {
 
     // Ez a metódus a Spring Boot backend egyik endpointja, amely fogadja a HTML
     // form által küldött adatokat, majd elmenti az adatbázisba.
-    @PostMapping("/animals/add") // Ez definiál egy HTTP endpointot, ami az add.html fájlban van.
+    @PostMapping("/animals/view") // Ez definiál egy HTTP endpointot, ami az add.html fájlban van.
 
     // @RequestParam Map<String, String> newuser -> Összegyűjti a form mezőket egy
     // Map-be.
@@ -62,7 +67,7 @@ public class AnimalsController {
     // HttpServletResponse response -> Ez a HTTP válasz objektum.
     public String addAnimal(@RequestParam Map<String, String> newanimal, Model model, HttpServletResponse response) {
 
-        System.out.println("ADD user");
+        System.out.println("ADD animal");
 
         // A html-ben lévő name attribútumra hivatkozunk a jobb oldalon.
         String newName = newanimal.get("name");
@@ -71,7 +76,7 @@ public class AnimalsController {
         // Ellenőrizzük, hogy a mezők ki vannak-e töltve
         if (newName == null || newName.isBlank() || weightStr == null || weightStr.isBlank()) {
             model.addAttribute("error", "Name and weight are required!");
-            return "animals/add"; // vissza a formhoz, hibaüzenettel
+            return "add"; // vissza a formhoz, hibaüzenettel
         }
 
         int newWeight;
@@ -79,7 +84,7 @@ public class AnimalsController {
             newWeight = Integer.parseInt(weightStr);
         } catch (NumberFormatException e) {
             model.addAttribute("error", "Hibás input!");
-            return "animals/add"; // vissza a formhoz, hibaüzenettel
+            return "add"; // vissza a formhoz, hibaüzenettel
         }
 
         // Ezzel mentjük az adatbázisba a sort. Kb egy INSERT INTO ...
@@ -91,6 +96,6 @@ public class AnimalsController {
         // Ez visszaad egy HTML oldalt. A Spring megkeresi ezt: templates/animals/
         // Átirányítás a listázó oldalra.
         return "redirect:/animals/view";
-    }
 
+    }
 }

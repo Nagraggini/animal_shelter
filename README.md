@@ -8,7 +8,7 @@ The goal of this project is to demonstrate how to build a dynamic web applicatio
 
 This web application is an administrative interface for an animal shelter, providing functionality to list animals and to record new animal data.
 
-[Visit my site!](https://animal-shelter-hro5.onrender.com/animals/view)
+[Visit my site!](https://animal-shelter-hro5.onrender.com/)
 
 ```
   .   ____          _            __ _ _
@@ -45,7 +45,7 @@ Frontend (HTML + Thymeleaf)
 Spring Controller  
 │  
 ▼  
-Controller (Business Logic)
+Controller (Business Logic)  
 │  
 ▼  
 PostgreSQL Database (data)
@@ -87,7 +87,7 @@ docker run -p 8080:8080 animal_shelter
 
 [Repository for the above youtube video.](https://github.com/bobbychansfu/springboot-render/tree/7d38d0343465661adceb6372591a8353717dfd5e)
 
-## ////////////////////////////////////////////////////////////////////////////////////
+## ///////////////////////////////////////////////////////////////////////////////////
 
 Hungarian version - Magyar verzió
 
@@ -101,7 +101,7 @@ Rövid leírás
 
 Ez a webalkalmazás egy állatmenhely adminisztrációs felülete, amely biztosítja az állatok listázását és új állatok adatainak rögzítését.
 
-[Látogasd meg az oldalam!](https://animal-shelter-hro5.onrender.com/animals/view)
+[Látogasd meg az oldalam!](https://animal-shelter-hro5.onrender.com/)
 
 # Amit használtam:
 

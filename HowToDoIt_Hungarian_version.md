@@ -338,25 +338,6 @@ A vs code-ban a pom.xml-hez adjuk hozzá a postgresql drivert. Jobb klikk a pom.
 
 Az application.properties fájlban rendeljük össze a weboldalt a render.com-os adatbázissal.
 
-## Gyorsabb módszer, hogy módosítsd az adatbázist:
-
-Postgresql-t [innen](https://www.postgresql.org/download/) tudod letölteni. Verzió: 16.11 Egyezzen fentebb létrehozott render.com-os adatbázissal. A telepítésközben a render.com-ról kell ki másolni az adatbázis jelszót, meg a többit. Az adatbázist be kell állítani a fentebb leírt módon.
-
-A terminálba másold be a render.com-ról a PSQL Command-ot.
-PGPASSWORD=sekoojWQ5YUGrgC3080avcnkVvgY4LSQ psql -h dpg-d69k87buibrs739i5fu0-a.frankfurt-postgres.render.com -U database_olpd_user database_olpd
-
-Minden adat törlése:
-DELETE FROM animals;
-
-Adatmódosítás:
-UPDATE animals
-SET name = 'Morzsi'
-WHERE uid =44;
-
-A táblát így tudod csekkolni a terminálban:
-\d animals
-q-val tudsz kilépni.
-
 # Teljes Flow
 
 Browser  
@@ -378,4 +359,47 @@ Database
  ▼  
 HTML response: showAll.html
 
+# Kezdőknek
+
 [Alapok a webprogramozáshoz blogom.](https://nagraggini.github.io/Web-practising-and-fun/Web_Development/Practising/1-HTML%20Practising/2-Blog.html)
+
+# Teszteléshez
+
+## Gyors módszer az adatbázis eléréséhez:
+
+Postgresql-t [innen](https://www.postgresql.org/download/) tudod letölteni. Verzió: 16.11 Egyezzen fentebb létrehozott render.com-os adatbázissal. A telepítésközben a render.com-ról kell ki másolni az adatbázis jelszót, meg a többit. Az adatbázist be kell állítani a fentebb leírt módon.
+
+A terminálba másold be a render.com-ról a PSQL Command-ot.
+PGPASSWORD=sekoojWQ5YUGrgC3080avcnkVvgY4LSQ psql -h dpg-d69k87buibrs739i5fu0-a.frankfurt-postgres.render.com -U database_olpd_user database_olpd
+
+Minden adat törlése, kivéve Cirmit:
+DELETE FROM animals WHERE name <> 'Cirmi';
+
+Adatmódosítás:
+UPDATE animals
+SET name = 'Morzsi'
+WHERE uid =44;
+
+A táblát így tudod csekkolni a terminálban:
+\d animals
+q-val tudsz kilépni.
+
+Listázás:
+SELECT \*
+FROM animals;
+
+## Futtatás localhost-on
+
+A AnimalShelterApplication.java fájl legyen megnyitva aktuálisan.
+
+Nyomd meg a start gombot, hogy localhost-on tesztelt az weboldalt.
+
+Ha az oldal elindult, a terminálban ezt kell látnod:  
+Started AnimalShelterApplication in 9.588 seconds (process running for 10.541)
+
+Ha nem indul el, keresd meg a terminálban az ERROR-t.
+
+Böngészőbe írd be: http://localhost:8080/  
+F12 (DevTools) → Network fülön könnyebb ellenőrizni.
+
+Szerver leállítása: IDE-ben a Stop gomb, Linux-on a terminálban Ctrl+C.

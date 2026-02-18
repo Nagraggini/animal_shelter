@@ -7,6 +7,9 @@
 
         <script src="https://cdn.tailwindcss.com"></script>
 
+        <!-- Saját CSS -->
+        <link rel="stylesheet" href="/css/style.css" />
+
         <link
             rel="icon"
             type="image/svg+xml"
@@ -58,12 +61,21 @@ http://localhost:8080/animals/view-->
             <div class="container text-center mt-5">
                 <!--Fontos, hogy get legyen a method, mert az add.html egy statikus oldal.-->
                 <form action="/add.html" method="get">
-                    <button
+                    <input
+                        type="submit"
+                        class="relative overflow-hidden w-full bg-purple-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-black-600"
+                        value="Add a new animal"
+                    />
+                </form>
+            </div>
+
+            <div class="container text-center mt-5">
+                <form action="/" method="get">
+                    <input
                         type="submit"
                         class="relative overflow-hidden w-full bg-green-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-black-600"
-                    >
-                        Back and Add a new animal
-                    </button>
+                        value="Back to the main page"
+                    />
                 </form>
                 <br />
                 <div class="col-md-4">
@@ -75,9 +87,6 @@ http://localhost:8080/animals/view-->
                     </a>
                 </div>
             </div>
-
-            <!-- TODO: Örökbeadás funkció gomb és hozzá az ORM. -->
-            <!-- TODO: Kutya ás Macska osztály használata. Valamint az abstract osztály visszaállítása.-->
         </main>
     </body>
 </html>

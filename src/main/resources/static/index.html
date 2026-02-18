@@ -23,7 +23,8 @@
                     shelter.
                 </p>
             </div>
-            <div class="mt-5 text-center">
+
+            <div class="container text-center mt-5">
                 <!--Fontos, hogy get legyen a method, mert az add.html egy statikus oldal.-->
                 <form action="/add.html" method="get">
                     <button
@@ -33,17 +34,19 @@
                         Add a new animal
                     </button>
                 </form>
+            </div>
 
-                <div class="mt-5 text-center">
-                    <form action="/animals/view" method="get">
-                        <input
-                            type="submit"
-                            value="Show all animals"
-                            class="relative overflow-hidden w-full bg-green-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-black-600"
-                        />
-                    </form>
-                </div>
+            <div class="container text-center mt-5">
+                <form action="/animals/view" method="get">
+                    <input
+                        type="submit"
+                        value="Show all animals"
+                        class="relative overflow-hidden w-full bg-blue-500 text-white font-semibold py-2 rounded-lg"
+                    />
+                </form>
+            </div>
 
+            <div class="container text-center mt-5">
                 <br />
                 <a
                     href="https://github.com/Nagraggini/animal_shelter"

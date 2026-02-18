@@ -13,5 +13,11 @@ public class AnimalShelterApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AnimalShelterApplication.class, args);
 	}
+	/*
+	 * TODO: Örökbe fogadás és törlés az adatbázisból.
+	 * TODO: Örökbeadás funkció gomb és hozzá az ORM.
+	 * TODO: Kutya ás Macska osztály használata. Valamint az abstract osztály
+	 * visszaállítása.
+	 */
 
 }
