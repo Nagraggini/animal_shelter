@@ -145,11 +145,22 @@ Ez az egész Dockerfile arra kell, hogy:
 
 # Tailwind stílus használata
 
+Node.js-t telepítsd. Linux-on írd be a terminálba, hogy: sudo apt update
+Utána: sudo apt install nodejs
+
+npm-et is telepítsd -> sudo apt install npm
+
+Így csekkold, hogy le van-e töltve:
+node -v
+npm -v
+
 [Tailwind](https://tailwindcss.com/docs/animation)
 
 A HTML-ben a head tagbe másold be ezt:
 
     <script src="https://cdn.tailwindcss.com"></script>
+
+A Tailwind CSS IntelliSense kiegészítőt ajánlott telepíteni a vs code-on.
 
 # CI/CD (Continuous Integration / Continuous Deployment) folyamat:
 
@@ -366,3 +377,5 @@ Database
  │  
  ▼  
 HTML response: showAll.html
+
+[Alapok a webprogramozáshoz blogom.](https://nagraggini.github.io/Web-practising-and-fun/Web_Development/Practising/1-HTML%20Practising/2-Blog.html)

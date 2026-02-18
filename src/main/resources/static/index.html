@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Animal Shelter</title>
+
+        <!--Tail Wind css-->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Saját CSS -->
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <!--http://localhost:8080/-->
+
+    <body class="custom-bg min-h-screen flex items-center justify-center">
+        <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+            <h1 class="text-3xl font-bold text-center mb-6">
+                Welcome to the Animal Shelter
+            </h1>
+
+            <div>
+                <p class="text-gray-700 text-lg leading-relaxed">
+                    This web app lets you view and add animals for an animal
+                    shelter.
+                </p>
+            </div>
+            <div class="mt-5 text-center">
+                <!--Fontos, hogy get legyen a method, mert az add.html egy statikus oldal.-->
+                <form action="/add.html" method="get">
+                    <button
+                        type="submit"
+                        class="relative overflow-hidden w-full bg-purple-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-black-600"
+                    >
+                        Add a new animal
+                    </button>
+                </form>
+
+                <div class="mt-5 text-center">
+                    <form action="/animals/view" method="get">
+                        <input
+                            type="submit"
+                            value="Show all animals"
+                            class="relative overflow-hidden w-full bg-green-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-black-600"
+                        />
+                    </form>
+                </div>
+
+                <br />
+                <a
+                    href="https://github.com/Nagraggini/animal_shelter"
+                    class="text-blue-600 hover:underline"
+                >
+                    Source code
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
