@@ -25,19 +25,25 @@ Project: Maven
 Language: Java
 Spring Boot: 4.0.2
 Artifact és Name: projektneve, amit az elején megadtál.
-Packaging: Jar (Ugyanaz, amit az elején megadtál.)
+Packaging: Jar
 Conf: Properties
-Java: 17 (Ugyanaz, amit az elején megadtál.)
+Java: 17
 
 Dependenciák:
-Spring Boot DevTools
-Spring Web
-Spring Session for JDBC
-Thymeleaf
-Spring Data JPA
-Spring Data JDBC
-H2 Database
-PostgreSQL Driver
+Spring Boot DevTools (Fejlesztéshez kell, éles appba nem, gyorsabb újraindítás és nem kell kézzel leállítani és újrainsítani a szervert.)
+Spring Web (Webalkalmazáshoz kell, hogy legyen @Controller osztály, HTTP kérések kezelés.)
+Spring Session for JDBC (Arra való, hogy a session adatokat adatbázisban tárolja. Egyszerű CRUD-nál nem szükséges.)
+Thymeleaf (Java változók megjelenítésében HTML-ben.)
+Spring Data JPA  
+(Ez az ORM réteg. Entity osztályok használatához és CRUD müveletekhez.
+CRUD:  
+ C – Create → létrehozás  
+ R – Read → lekérdezés / olvasás  
+ U – Update → módosítás  
+ D – Delete → törlés)  
+Spring Data JDBC (JPA-hoz hasonló, de nincs komplex ORM működik. Alapból elég a JPA csa.)
+H2 Database (Ez egy beépített, memóriában futó adatbázis. Gyors teszthez jól jön, amúgy nem kell mert PostgreSQl adatbázis van.)
+PostgreSQL Driver (Ez a driver teszi lehetővé, hogy az alkalmazás kapcsolódjon a PostgreSQL adatbázishoz)
 
 # Projekt feltöltése githubra és render.com-ra
 
@@ -422,7 +428,7 @@ FROM animals;
 
 A AnimalShelterApplication.java fájl legyen megnyitva aktuálisan.
 
-Nyomd meg a start gombot, hogy localhost-on tesztelt az weboldalt.
+Nyomd meg a start gombot, hogy localhost-on tesztelt az weboldalt. Vagy a Spring Boot Dashboard-on a start gombra menj, akár mi meg lehet nyitva jobb oldalt.
 
 Ha az oldal elindult, a terminálban ezt kell látnod:  
 Started AnimalShelterApplication in 9.588 seconds (process running for 10.541)

@@ -3,16 +3,17 @@ package com.example.animal_shelter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//Itt kell rámenned a start gombra, hogy localhost-on tesztelt az weboldalt.
+//Itt kell rámenned a start gombra, hogy localhost-on tesztelt az weboldalt. Vagy a Spring Boot Dashboard-on a start gombra.
 //Elindult az oldal, ha ezt látod a lenti terminálban: Started AnimalShelterApplication in 9.588 seconds (process running for 10.541)
 //Ha nem indul el, akkor alul a terminálban keresd meg az ERROR-t.
-//http://localhost:8080/add.html
+//http://localhost:8080
 @SpringBootApplication
 public class AnimalShelterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AnimalShelterApplication.class, args);
 	}
+	// ! Új branchbe csináld a dolgokat aztán teszt után jöhet a merge.
 	/*
 	 * TODO: Nézd meg a másik három videót:
 	 * https://www.youtube.com/watch?v=RK6aAjUMcl0&list=PLg7lel5LdVjyO7jk-
