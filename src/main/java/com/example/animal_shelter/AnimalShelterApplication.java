@@ -21,12 +21,17 @@ public class AnimalShelterApplication {
 	 * 
 	 * ! A webes nézetben állítsd be a poco-meretet és úgy csekkold a weboldalt.
 	 */
+	// ^ Java Programozás Kezdőknek
+	// https://www.youtube.com/watch?v=8QyaHvMQZi4&list=PL92V_WHHt2CnXaUIA9T2ww7peDK4lqmZj
+
 	// ! Tailwind rendes import állása (npm init -y stb tailwind.config.js stb)
 
 	// & TODO: Legyen egy beléptető felület a dolgozóknak, ahol admin admin a jelszó
 	// &
 	// youtube.com/watch?v=X7pGCmVxx10&pp=ygUkSG93IHRvIGNyZWF0ZSBhIGxvZ2luIGluIHNwcmluZyBib290
 
+	// & Spring MVC Beginner Project
+	// https://www.youtube.com/watch?v=VqptK6_icjk&list=PL82C6-O4XrHejlASdecIsroNEbZFYo_X1
 	/*
 	 * 
 	 * TODO: Örökbe fogadás és törlés az adatbázisból. Legyen egy külön tábla az
