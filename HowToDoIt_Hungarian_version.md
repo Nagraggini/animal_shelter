@@ -62,7 +62,35 @@ Ez az egész Dockerfile arra kell, hogy:
 - lefordítsa a Spring Boot projektet
 - JAR fájlt készítsen
 - elindítsa egy konténerben
--
+
+## Dockerfile tartalma
+
+```
+# Build stage: a projekt lefordítása és JAR csomagolása Maven segítségével.
+# Java verzió a pom.xml-ben van beállítva (Java 17).
+
+# A from sor létrehoz egy ideiglenes konténert.
+FROM maven:3.8.5-openjdk-17 AS build
+# Fordításra szolgál.
+WORKDIR /app
+COPY . .
+
+# Lefordítja a Java kódot és létrehozza a JAR fájlt. Ezt a jar fájlt használjuk lentebb a copy sorban.
+RUN mvn clean package -DskipTests
+
+# Run stage: ez a konténer fogja futtatni az alkalmazást.
+# Java verzió a pom.xml-ben van beállítva (Java 17).
+FROM openjdk:17.0.1-jdk-slim
+WORKDIR /app
+
+# Ez átmásolja a fentebb létrehozott JAR fájlt a build stage-ből a run stage-be (/app/animal_shelter.jar).
+COPY --from=build /app/target/*.jar animal_shelter.jar
+
+# A Spring Boot alkalmazás a 8080-as porton fut.
+EXPOSE 8080
+
+# Alkalmazás futtatása. ENTRYPOINT: a konténer indításakor a JAR futtatása.
+ENTRYPOINT ["java","-jar","animal_shelter.jar"]
 
 # Projekt feltöltése githubra és render.com-ra
 
@@ -75,6 +103,7 @@ render.com regisztrálj -> Kösd össze a github fiókoddal.
 New -> Web Service -> Válaszd ki a listából a progjekt nevét (animal_shelter)
 Language: Docker
 -> Deploy web service Kb 15 percig eltart a deploy.
+```
 
 ## SSH key
 
@@ -348,6 +377,45 @@ SELECT \* FROM animals;
 A vs code-ban a pom.xml-hez adjuk hozzá a postgresql drivert. Jobb klikk a pom.xml-en -> Add Starts.. -> Postgresql Driver -> Enter -> Proceed.
 
 Az application.properties fájlban rendeljük össze a weboldalt a render.com-os adatbázissal.
+
+# application.properties fájl
+
+```
+spring.application.name=animal_shelter
+
+# Debughoz engedélyezzük a Tomcat access logot
+server.tomcat.accesslog.enabled=true
+
+# Automatikusan módosítja az adatbázist.
+#Ha hozzáadsz egy új oszlopot az egyik tábládhoz, akkor ez automatikusan feltölti az új oszlopot az adatbázisba.
+spring.jpa.hibernate.ddl-auto=update
+# Minden SQL lekérdezést kiír a konzolra (debughoz hasznos).
+spring.jpa.show-sql=true
+
+#Formázza és kommenteli az SQL lekérdezéseket a konzolban.
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.use_sql_comments=true
+
+#Protokoll, // után másold be a render-com-ról az Extend Database @ utáni részét.
+#Ez nem annyira biztonságos módszer.
+spring.datasource.url=jdbc:postgresql://dpg-d69k87buibrs739i5fu0-a.frankfurt-postgres.render.com/database_olpd
+
+#Ez a biztonságosabb módszer, mert nem látják az url részt.
+# TODO: Át kell javítanom a linket:
+#spring.datasource.url=jdbc:postgresql://dpg-d69k87buibrs739i5fu0-a/database_olpd
+
+# render.com-ról másold be ezeket:
+spring.datasource.username=database_olpd_user
+
+#Alapjáraton a jelszót elszokták rejteni, de ez csak demo weboldal.
+spring.datasource.password=sekoojWQ5YUGrgC3080avcnkVvgY4LSQ
+
+# Elmentjük a logokat egy fájlba. A logokat a Controllers osztályból szedi. Kb a syso-k összegyűjtése.
+logging.file.name=logs/animals.log
+logging.level.com.example.animal_shelter.controllers=INFO
+
+#Miután a fentieket beállítottad, újra kell indítani a szervert.
+```
 
 # Teljes Flow
 
