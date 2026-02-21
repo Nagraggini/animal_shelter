@@ -45,6 +45,20 @@ Spring Data JDBC (JPA-hoz hasonló, de nincs komplex ORM működik. Alapból el�
 H2 Database (Ez egy beépített, memóriában futó adatbázis. Gyors teszthez jól jön, amúgy nem kell mert PostgreSQl adatbázis van.)
 PostgreSQL Driver (Ez a driver teszi lehetővé, hogy az alkalmazás kapcsolódjon a PostgreSQL adatbázishoz)
 
+# Dockerfile
+
+Az alkalmazás győkér könyvtárába hozd létre egyből a Dockerfile, ne adj neki kiterjesztést, txt-t sem.
+
+Ez a Dockerfile a Spring Boot alkalmazás konténerizálására szolgál.
+
+A célja, hogy az alkalmazásodat lefordítsa és futtassa egy Docker konténerben, így bárhol ugyanúgy működjön (Render, saját gép, stb.).
+
+Ez az egész Dockerfile arra kell, hogy:
+
+- lefordítsa a Spring Boot projektet
+- JAR fájlt készítsen
+- elindítsa egy konténerben
+- 
 # Projekt feltöltése githubra és render.com-ra
 
 https://github.com/-ra regisztrálj be.
@@ -134,20 +148,6 @@ public class Animal {
 
 }
 ```
-
-# Dockerfile
-
-Az alkalmazás győkér könyvtárába hozd létre egyből a Dockerfile, ne adj neki kiterjesztést, txt-t sem.
-
-Ez a Dockerfile a Spring Boot alkalmazás konténerizálására szolgál.
-
-A célja, hogy az alkalmazásodat lefordítsa és futtassa egy Docker konténerben, így bárhol ugyanúgy működjön (Render, saját gép, stb.).
-
-Ez az egész Dockerfile arra kell, hogy:
-
-- lefordítsa a Spring Boot projektet
-- JAR fájlt készítsen
-- elindítsa egy konténerben
 
 # Tailwind stílus használata
 
