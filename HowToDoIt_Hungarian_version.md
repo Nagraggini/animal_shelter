@@ -109,6 +109,10 @@ Language: Docker
 
 Ez alapján hozd létre: https://github.com/settings/ssh/new
 
+## Build failed
+
+Ha valamit elrontottál is kijavítod, utána a render.com-on -> Manual Deploy -> Deploy latest commit
+
 # Projekt futtatása
 
 Ha elindítod a java fájlt (AnimalShelterApplication.java), akkor a böngészőbe írd be ezt: http://localhost:8080/actuator
