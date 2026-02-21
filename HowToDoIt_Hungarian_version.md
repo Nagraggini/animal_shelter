@@ -1,3 +1,7 @@
+# Kezdőknek
+
+[Alapok a webprogramozáshoz blogom.](https://nagraggini.github.io/Web-practising-and-fun/Web_Development/Practising/1-HTML%20Practising/2-Blog.html)
+
 # Spring Boot
 
 [Ez alapján csináltam.](https://www.youtube.com/watch?v=RK6aAjUMcl0&list=PLg7lel5LdVjyO7jk-4biyr0fqPVygTLOk)
@@ -58,7 +62,8 @@ Ez az egész Dockerfile arra kell, hogy:
 - lefordítsa a Spring Boot projektet
 - JAR fájlt készítsen
 - elindítsa egy konténerben
-- 
+-
+
 # Projekt feltöltése githubra és render.com-ra
 
 https://github.com/-ra regisztrálj be.
@@ -394,10 +399,6 @@ CREATE INDEX spring_session_ix2 ON spring_session (expiry_time);
 CREATE INDEX spring_session_ix3 ON spring_session (principal_name);
 
 Ezután a Spring Session JDBC automatikusan használni fogja ezt a táblát a session-ök tárolására és lejárt session-ök törlésére.
-
-# Kezdőknek
-
-[Alapok a webprogramozáshoz blogom.](https://nagraggini.github.io/Web-practising-and-fun/Web_Development/Practising/1-HTML%20Practising/2-Blog.html)
 
 # Teszteléshez
 
