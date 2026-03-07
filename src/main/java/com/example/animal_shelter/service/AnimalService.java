@@ -15,6 +15,7 @@ public class AnimalService {
     @Autowired
     private AnimalRepository animalRepo;
 
+    // ORM segítségével egy select fut le a háttérben.
     public List<Animal> findAll() {
         return animalRepo.findAll();
     }
@@ -27,7 +28,7 @@ public class AnimalService {
         return animalRepo.save(animal);
     }
 
-     public void delete(Integer id) {
+    public void delete(Integer id) {
         animalRepo.deleteById(id);
     }
 }

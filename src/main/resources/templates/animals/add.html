@@ -103,9 +103,10 @@
                 </a>
             </div>
 
+            <!--JavaScript kód, ami AJAX kéréssel elküldi az űrlap adatait a backendnek, majd siker esetén átirányít egy másik oldalra.-->
             <script>
                 document
-                    .getElementById("addAnimalApiForm")
+                    .getElementById("addAnimalApiForm") //form  id="addAnimalApiForm"
                     .addEventListener("submit", async (e) => {
                         e.preventDefault(); // ne töltse újra az oldalt
 
@@ -116,6 +117,7 @@
                         };
 
                         try {
+                            //API hívás küldése. Ez egy HTTP POST kérés a backendhez.
                             const response = await fetch("/api/animals", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
@@ -125,6 +127,7 @@
                             if (!response.ok)
                                 throw new Error("Hiba az adat mentésekor");
 
+                            //A válasz feldolgozása.
                             const animal = await response.json();
                             console.log("Mentve", animal);
 

@@ -55,7 +55,7 @@ http://localhost:8080/animals/view-->
                     />
                 </form>
             </div>
-
+            <!--A static mappában lévő html-ra küld vissza.-->
             <div class="container text-center mt-5">
                 <form action="/" method="get">
                     <input
@@ -67,29 +67,36 @@ http://localhost:8080/animals/view-->
                 <br />
                 <div class="col-md-4">
                     <a
-                        href="https://github.com/Nagraggini/animal_shelter" rel="noreferrer"
+                        href="https://github.com/Nagraggini/animal_shelter"
+                        rel="noreferrer"
                         class="text-blue-600 hover:underline"
                     >
                         Source code
                     </a>
                 </div>
             </div>
-
+            <!--A backend API-ból betölti az állatokat és dinamikusan megjeleníti őket egy HTML táblázatban.-->
             <script>
+                //A kód csak akkor fut le, amikor az egész HTML oldal betöltődött.
                 document.addEventListener("DOMContentLoaded", () => {
+                    //HTTP GET kérés a backend API-hoz.
                     fetch("/api/animals")
+                        //A válasz JSON feldolgozása.
                         .then((r) => r.json())
                         .then((animals) => {
+                            //A táblázat kiválasztása
                             const tbody = document.querySelector("tbody");
 
                             animals.forEach((a) => {
+                                //Új táblázatsor létrehozása.
                                 const row = document.createElement("tr");
 
+                                //Az adatok behelyezése. A ${} template string változó behelyettesítés.
                                 row.innerHTML = `
-                    <td class="border px-4 py-2">${a.name}</td>
+                    <td class="border px-4 py-2">${a.name}</td> 
                     <td class="border px-4 py-2">${a.weight}</td>
                 `;
-
+                                //A sor hozzáadása a táblához
                                 tbody.appendChild(row);
                             });
                         });
