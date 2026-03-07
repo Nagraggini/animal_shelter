@@ -14,6 +14,10 @@ public class AnimalShelterApplication {
 		SpringApplication.run(AnimalShelterApplication.class, args);
 	}
 	// ! Új branchbe csináld a dolgokat aztán teszt után jöhet a merge.
+
+	// ^ Java Programozás Kezdőknek, ezek spring boot-ról szólank!!!!!!
+	// https://www.youtube.com/watch?v=8qMi3e_fzKc&list=PL92V_WHHt2CnXaUIA9T2ww7peDK4lqmZj&index=23
+
 	// ? Ha többször nyomok rá a send-re akkor többször is létrehozza az állatot.
 	/*
 	 * TODO: Nézd meg a másik kettő videót:
@@ -22,8 +26,6 @@ public class AnimalShelterApplication {
 	 * 
 	 * ! A webes nézetben állítsd be a poco-meretet és úgy csekkold a weboldalt.
 	 */
-	// ^ Java Programozás Kezdőknek
-	// https://www.youtube.com/watch?v=8QyaHvMQZi4&list=PL92V_WHHt2CnXaUIA9T2ww7peDK4lqmZj
 
 	// ! Tailwind rendes import állása (npm init -y stb tailwind.config.js stb)
 
