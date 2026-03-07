@@ -16,7 +16,7 @@ public class AnimalShelterApplication {
 	// ! Új branchbe csináld a dolgokat aztán teszt után jöhet a merge.
 	// ? Ha többször nyomok rá a send-re akkor többször is létrehozza az állatot.
 	/*
-	 * TODO: Nézd meg a másik három videót:
+	 * TODO: Nézd meg a másik kettő videót:
 	 * https://www.youtube.com/watch?v=RK6aAjUMcl0&list=PLg7lel5LdVjyO7jk-
 	 * 4biyr0fqPVygTLOk
 	 * 
