@@ -1,8 +1,10 @@
-package com.example.animal_shelter.api.models;
+package com.example.animal_shelter.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.animal_shelter.models.Animal;
 
 //Automatikusan létrehoz neked egy komplett adatbázis-kezelő réteget a User entitáshoz — anélkül, hogy SQL-t kellene írni.
 //JpaRepository<EntitásTípus, PrimaryKeyTípus>

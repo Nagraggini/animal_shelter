@@ -1,14 +1,10 @@
-package com.example.animal_shelter.api.models;
+package com.example.animal_shelter.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-//Készítse el az osztályhierarchiát úgy, hogy általános állat nem jöhet létre, csak kutya vagy macska.
-//Emiatt lesz ez absztrakt, mert ezt nem lehet példányosítani.
-//abstract class volt
 
 //A models mappában lévő java fájlokkal kezeljük a felhasználókat.(vagy objektumokat,szolgáltatásokat)
 //Az annotációk megmondja, hogy van egy ilyen táblánk az adatbázisban.
@@ -20,7 +16,7 @@ public class Animal {
 	// egy uid oszlopunk.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Lefogja generálni az értékét.
-	private int uid;
+	private Integer uid;
 
 	// Változók:
 	private String name;
@@ -86,9 +82,6 @@ public class Animal {
 	public String toString() {
 		return name + " " + weight + " kg";
 	}
-
-	// Absztrakt osztályként előírtuk, hogy ezt a leszármazottaknak kötelező felül
-	// írniuk.
-	// public double napiEtelAdag();
+	
 
 }

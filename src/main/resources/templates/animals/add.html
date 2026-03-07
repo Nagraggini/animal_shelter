@@ -8,7 +8,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
 
         <!-- Saját CSS -->
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="/css/style.css" />
 
         <link
             rel="icon"
@@ -35,39 +35,46 @@
             endpointjára. Az adatbázis kapcsolat a backendben történik:
             Controller → Service → Repository → Database-->
             <div class="container text-center mt-5">
-                <form action="/animals/view" method="post" class="space-y-4">
+                <form
+                    id="addAnimalApiForm"
+                    action="/animals/view"
+                    method="post"
+                    class="space-y-4"
+                >
+                    <!-- Name input -->
                     <input
                         type="text"
                         name="name"
                         placeholder="Name"
-                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required
-                        ...
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
 
+                    <!-- Weight input -->
                     <input
                         type="number"
                         name="weight"
                         placeholder="Weight"
-                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         min="2"
                         step="1"
                         max="50"
                         required
-                        ...
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
 
-                    <input
+                    <!-- Submit button -->
+                    <button
                         type="submit"
-                        value="SEND"
                         class="relative overflow-hidden w-full bg-purple-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-black-600"
-                    />
+                    >
+                        SEND (API)
+                    </button>
                 </form>
             </div>
 
             <div class="container text-center mt-5">
                 <!--Ezen nézheted meg a felhasználók listáját: http://localhost:8080/animals/view-->
-
+                <!--A Templates mappában keresi a formot.-->
                 <form action="/animals/view" method="get" class="space-y-4">
                     <input
                         type="submit"
@@ -89,11 +96,46 @@
             <div class="container text-center mt-5">
                 <a
                     href="https://github.com/Nagraggini/animal_shelter"
+                    rel="noreferrer"
                     class="text-blue-600 hover:underline"
                 >
                     Source code
                 </a>
             </div>
+
+            <script>
+                document
+                    .getElementById("addAnimalApiForm")
+                    .addEventListener("submit", async (e) => {
+                        e.preventDefault(); // ne töltse újra az oldalt
+
+                        const form = e.target;
+                        const payload = {
+                            name: form.name.value,
+                            weight: parseInt(form.weight.value, 10),
+                        };
+
+                        try {
+                            const response = await fetch("/api/animals", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(payload),
+                            });
+
+                            if (!response.ok)
+                                throw new Error("Hiba az adat mentésekor");
+
+                            const animal = await response.json();
+                            console.log("Mentve", animal);
+
+                            // Átirányítás a showAll.html-re
+                            window.location.href = "/animals/view"; // a controller mappingje
+                        } catch (err) {
+                            console.error(err);
+                            alert("Hiba történt az állat mentésekor!");
+                        }
+                    });
+            </script>
         </div>
     </body>
 </html>

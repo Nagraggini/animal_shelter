@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.animal_shelter.api.models.Animal;
-import com.example.animal_shelter.api.models.AnimalRepository;
+import com.example.animal_shelter.models.Animal;
+import com.example.animal_shelter.repository.AnimalRepository;
 
 @Service
 public class AnimalService {
@@ -25,5 +25,9 @@ public class AnimalService {
 
     public Animal save(Animal animal) {
         return animalRepo.save(animal);
+    }
+
+     public void delete(Integer id) {
+        animalRepo.deleteById(id);
     }
 }

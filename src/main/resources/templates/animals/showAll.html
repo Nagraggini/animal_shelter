@@ -21,7 +21,7 @@ http://localhost:8080/animals/view-->
     <body
         class="custom-bg bg-gray-100 flex justify-center items-center min-h-screen"
     >
-       <main>
+        <main>
             <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
                 <!--sor-->
                 <div class="col-md-4">
@@ -40,31 +40,14 @@ http://localhost:8080/animals/view-->
                                 <th class="border px-4 py-2">Weight</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!--Ez egy foreach:-->
-                            <!-- Az AnimalsController.java-ban a model.addAttribute("ani", animals") segítségével hivatkozunk a modelre. -->
-                            <!--A lenti sorban kell a szóköz a kettőspont előtt!-->
-                            <tr
-                                th:each="animal:${ani}"
-                                class="hover:bg-gray-100"
-                            >
-                                <td
-                                    th:text="${animal.name}"
-                                    class="border px-4 py-2"
-                                ></td>
-                                <td
-                                    th:text="${animal.weight}"
-                                    class="border px-4 py-2"
-                                ></td>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
 
             <div class="container text-center mt-5">
-                <!--Fontos, hogy get legyen a method, mert az add.html egy statikus oldal.-->
-                <form action="/add.html" method="get">
+                <!--A Templates mappában keresi a formot.-->
+                <form action="/animals/add" method="get">
                     <input
                         type="submit"
                         class="relative overflow-hidden w-full bg-purple-500 text-white font-semibold py-2 rounded-lg cursor-pointer before:absolute before:inset-0 before:bg-gradient-to-r before:from-white before:via-white/40 before:to-white/0 before:translate-x-[-100%] before:animate-[shine_1.5s_infinite] hover:bg-black-600"
@@ -84,13 +67,34 @@ http://localhost:8080/animals/view-->
                 <br />
                 <div class="col-md-4">
                     <a
-                        href="https://github.com/Nagraggini/animal_shelter"
+                        href="https://github.com/Nagraggini/animal_shelter" rel="noreferrer"
                         class="text-blue-600 hover:underline"
                     >
                         Source code
                     </a>
                 </div>
             </div>
-       </main>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    fetch("/api/animals")
+                        .then((r) => r.json())
+                        .then((animals) => {
+                            const tbody = document.querySelector("tbody");
+
+                            animals.forEach((a) => {
+                                const row = document.createElement("tr");
+
+                                row.innerHTML = `
+                    <td class="border px-4 py-2">${a.name}</td>
+                    <td class="border px-4 py-2">${a.weight}</td>
+                `;
+
+                                tbody.appendChild(row);
+                            });
+                        });
+                });
+            </script>
+        </main>
     </body>
 </html>
