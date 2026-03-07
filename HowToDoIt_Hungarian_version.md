@@ -147,6 +147,7 @@ Model – View – Controller
 A Controller réteg fogadja a HTTP kéréseket.
 
 ### HTTP módszerek:
+
 - `GET`: Adatok lekérése
 - `POST`: Új adat létrehozása
 - `PUT`: Adat frissítése
@@ -518,3 +519,278 @@ Böngészőbe írd be: http://localhost:8080/
 F12 (DevTools) → Network fülön könnyebb ellenőrizni.
 
 Szerver leállítása: IDE-ben a Stop gomb, Linux-on a terminálban Ctrl+C.
+
+# REST API
+
+A Spring Boot (Jackson) automatikusan átalakítja a bejövő JSON-t (@RequestBody) Animal objektummá, és vissza is JSON-t küld (@RestController).
+
+Fontos:
+
+A kliensnek Content-Type: application/json-et kell küldenie.
+A kérés törzse (body) legyen pl. { "name": "Buksi", "weight": 5 }.
+A szerver oldalon a Animal osztály getter/setter-ei legyenek rendben (nálatok vannak).
+Példa curl-lel:
+
+Tehát nem kell külön JSON fájl a projektben, a JSON a kérés része (vagy ha HTML/JS-ből küldöd, akkor a fetch body-ja).
+
+[Rest api](https://www.youtube.com/watch?v=Zo9xQzibp4Y)
+
+## Régi non rest api-s controller
+
+package com.example.animal_shelter.api.controllers;
+
+//ArrayList-hez:
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.animal_shelter.models.Animal;
+import com.example.animal_shelter.repository.AnimalRepository;
+import com.example.animal_shelter.service.AnimalService;
+
+import jakarta.servlet.http.HttpServletResponse;
+
+// Ez a kontroller figyeli a szervert, és lehetővé teszi, hogy információkat kapjunk a felhasználókról.
+@RestController
+public class AnimalsController {
+
+    // syso helyett:
+    private static final Logger logger = LoggerFactory.getLogger(AnimalsController.class);
+
+    @Autowired
+    private AnimalRepository animalRepo;
+
+    @GetMapping("/add.html")
+    public String addPage() {
+        return "add";
+    }
+
+    // Ez a metódus akkor fut le, ha a felhasználó HTTP GET kérést küld a
+    // /users/view URL-re.
+    // A @GetMapping annotáció egy endpointot definiál, amin keresztül a kliens
+    // kapcsolatba léphet a szerverrel.
+    // A visszatérési érték "users/showAll" a Thymeleaf template neve, amit a
+    // böngészőnek küldünk.
+    @GetMapping("/animals/view")
+    // Model -> org.springframework.ui -> Be is kerül fentre az importokhoz.
+    public String getAllAnimals(Model model) {
+        // Modell: A Spring MVC-ben a Model egy olyan “csomagoló” objektum, amiben
+        // adatokat küldünk a HTML template-nek (Thymeleaf, JSP, stb.).
+        logger.info("Getting all animals."); // info szintű log
+
+        // Mindegyik állat lekérése az adatbázisból.
+        List<Animal> animals = animalRepo.findAll();
+        // Vége az adatbázis meghívásnak.
+
+        // A modellhez hozzáadjuk az adatokat.
+        // "ani" – ez a név, amin keresztül a template-ben el tudjuk érni.
+        model.addAttribute("ani", animals);
+
+        // A "users/showAll" a Thymeleaf template neve, amit visszaad a böngészőnek
+        // A templates mappában van a showAll.html, ami meg fog jelenni.
+        // A return "users/showAll"; csak a template nevét adja vissza, amit a Spring
+        // MVC feldolgoz és a böngészőnek renderel.
+        return "animals/showAll";
+        // A böngésző nem kapja közvetlenül a Model objektumot, csak a renderelt HTML-t.
+    }
+
+    // Ez a metódus a Spring Boot backend egyik endpointja, amely fogadja a HTML
+    // form által küldött adatokat, majd elmenti az adatbázisba.
+    @PostMapping("/animals/view") // Ez definiál egy HTTP endpointot, ami az add.html fájlban van.
+
+    // @RequestParam Map<String, String> newuser -> Összegyűjti a form mezőket egy
+    // Map-be.
+    // A newanimal -> Egy kulcs-érték lista.
+    // HttpServletResponse response -> Ez a HTTP válasz objektum.
+    public String addAnimal(@RequestParam Map<String, String> newanimal, Model model, HttpServletResponse response) {
+
+        logger.info("Add animal.");
+
+        // A html-ben lévő name attribútumra hivatkozunk a jobb oldalon.
+        String newName = newanimal.get("name");
+        String weightStr = newanimal.get("weight");
+
+        // Ellenőrizzük, hogy a mezők ki vannak-e töltve
+        if (newName == null || newName.isBlank() || weightStr == null || weightStr.isBlank()) {
+            model.addAttribute("error", "Name and weight are required!");
+            return "add"; // vissza a formhoz, hibaüzenettel
+        }
+
+        int newWeight;
+        try {
+            newWeight = Integer.parseInt(weightStr);
+        } catch (NumberFormatException e) {
+            logger.error("Failed to parse weight: " + weightStr, e);
+            model.addAttribute("error", "Hibás input!");
+            return "add"; // vissza a formhoz, hibaüzenettel
+        }
+
+        // Ezzel mentjük az adatbázisba a sort. Kb egy INSERT INTO ...
+        // Ez az ORM (Object-Relational Mapping). Az ORM (itt a Spring Data JPA) kezeli
+        // az objektum → adatbázis leképezést.
+        animalRepo.save(new Animal(newName, newWeight)); // Jobb oldalt az Animal osztály konstruktorát hívjuk meg.
+        response.setStatus(201); // Beállítja a HTTP válasz státuszkódját 201-re, vagyis Created.
+
+        // Ez visszaad egy HTML oldalt. A Spring megkeresi ezt: templates/animals/
+        // Átirányítás a listázó oldalra.
+        // Redirect POST után: Jó a (PRG – Post/Redirect/Get), így frissítésnél
+        // nem ismétlődik a POST, nem lesz duplikáció!
+        return "redirect:/animals/view";
+
+    }
+
+}
+
+### non-rest api-s showAll.html
+
+ <!--th =thymeleaf
+                    each=foreach
+                    us a modelből jön.
+                    Végigmegyünk a us listán, minden elem animal néven lesz elérhető a <tr>-ban.-->
+
+                    <table class="table-auto border-collapse w-full">
+                        <thead>
+                            <tr class="bg-blue-200">
+                                <th class="border px-4 py-2">Name</th>
+                                <th class="border px-4 py-2">Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--Ez egy foreach:-->
+                            <!-- Az AnimalsController.java-ban a model.addAttribute("ani", animals") segítségével hivatkozunk a modelre. -->
+                            <!--A lenti sorban kell a szóköz a kettőspont előtt!-->
+                            <tr
+                                th:each="animal:${ani}"
+                                class="hover:bg-gray-100"
+                            >
+                                <td
+                                    th:text="${animal.name}"
+                                    class="border px-4 py-2"
+                                ></td>
+                                <td
+                                    th:text="${animal.weight}"
+                                    class="border px-4 py-2"
+                                ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+[Ez az utolsó olyan commit, ami non rest-api-s.](https://github.com/Nagraggini/animal_shelter/tree/61a0c6bb471e8ae1fa593e8652c99f3d301ea836)
+
+## Extra infó
+
+### Noreferrer
+
+A rel="noreferrer" HTML-attribútum megakadályozza, hogy a böngésző elküldje a forrásoldal adatait a céloldalnak, így növeli a biztonságot és a magánélet védelmét.
+
+```bash
+ <a rel="noreferrer"
+                    href="https://github.com/Nagraggini/animal_shelter"
+                    class="text-blue-600 hover:underline"
+                >
+                    Source code
+                </a>
+```
+
+## Projekt struktúra
+
+Spring Boot
+
+- REST API
+- JPA
+- Service layer
+- Repository layer
+
+Thymeleaf (A megjelenítéshez.)
+
+## Helyes mappa struktúra
+
+```bash
+ANIMAL_SHELTER
+│
+├─ src
+│  └─ main
+│     ├─ java
+│     │  └─ com
+│     │     └─ example
+│     │        └─ animalshelter
+│     │           │
+│     │           ├─ controllers
+│     │           │   └─ AnimalsPageController
+│     │           │   └─ ApiAnimalsController.java
+│     │           │
+│     │           ├─ models
+│     │           │   └─ Animal.java
+│     │           │
+│     │           ├─ repository
+│     │           │   └─ AnimalRepository.java
+│     │           │
+│     │           ├─ service
+│     │           │   └─ AnimalService.java
+│     │           │
+│     │           └─ AnimalShelterApplication.java
+│     │
+│     └─ resources
+│        │
+│        ├─ static
+│        │   ├─ css
+│        │   ├─ img
+│        │   ├─ js
+│        │   └─ index.html
+│        │
+│        ├─ templates
+│        │   └─ animals
+│        │       ├─ showAll.html
+│        │       └─ add.html
+│        │
+│        └─ application.properties
+│
+└─ pom.xml
+```
+
+Controller nem beszél közvetlenül az adatbázissal.
+
+Mindig:
+
+Controller
+↓
+Service
+↓
+Repository
+↓
+Database
+
+## Rendszer
+
+index.html
+↓
+showAll.html
+↓
+JavaScript fetch()
+↓
+/api/animals
+↓
+Spring Boot REST API
+↓
+JSON
+↓
+HTML táblázat
+
+## Endpoints
+
+http://localhost:8080/
+
+http://localhost:8080/animals/view
+http://localhost:8080/animals/add
+
+Api:
+http://localhost:8080/api/animals
+http://localhost:8080/api/animals/11

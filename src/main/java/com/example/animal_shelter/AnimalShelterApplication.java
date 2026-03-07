@@ -14,6 +14,7 @@ public class AnimalShelterApplication {
 		SpringApplication.run(AnimalShelterApplication.class, args);
 	}
 	// ! Új branchbe csináld a dolgokat aztán teszt után jöhet a merge.
+	// ? Ha többször nyomok rá a send-re akkor többször is létrehozza az állatot.
 	/*
 	 * TODO: Nézd meg a másik három videót:
 	 * https://www.youtube.com/watch?v=RK6aAjUMcl0&list=PLg7lel5LdVjyO7jk-
@@ -40,7 +41,14 @@ public class AnimalShelterApplication {
 	 * Örökbeadás funkció gomb és hozzá az ORM.
 	 */
 
-	// ~ TODO: Kutya ás Macska osztály használata. Valamint az abstract osztály
-	// visszaállítása.
-
+	/*
+	 * Red (!)
+	 * Blue (?)
+	 * Green (*)
+	 * Yellow (^)
+	 * Pink (&)
+	 * Purple (~)
+	 * Mustard (todo)
+	 * Grey (//)
+	 */
 }
