@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.animal_shelter.api.models.Animal;
 import com.example.animal_shelter.api.models.AnimalRepository;
+import com.example.animal_shelter.service.AnimalService;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -106,4 +107,6 @@ public class AnimalsController {
         return "redirect:/animals/view";
 
     }
+
+   
 }
