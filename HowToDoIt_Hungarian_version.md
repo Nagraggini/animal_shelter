@@ -498,14 +498,13 @@ DB_URL=jdbc:postgresql://dpg-d69k87buibrs739i5fu0-a.frankfurt-postgres.render.co
 DB_USER=Nagraggini
 DB_PASS=root
 
-Majd menj fel a render.com-ra az adatbázis infó részén láthatod az Internal Database URL-t másold ki.
+Majd menj fel a render.com-ra az adatbázis infó részén láthatod az External Database URL-t másold ki a dpg-től kezdve. Az elejére ezt másold be: "jdbc:postgresql://"
 Aztán a render.com-on a nem rég feltöltött web service-re menj rá. -> Environment -> Environment Variables -> Add melletti kicsi nyílra nyomj. -> Import from .env -> Másold ide a fájl tartalmát. -> Add variables.
 
 A felhasználónevet és jelszót módosítsd arra, amit a render.com-on látsz.
 A hozzáadott DB_URL-hez másold be az Internal Database URL-t az alábbi módosításokat eszközöld rajta.
 
 pl.: postgresql://*database_olpd_user:sekoojWQ5YUGrgC3080avcnkVvgY4LSQ@*dpg-d69k87buibrs739i5fu0-a/database_olpd
-
 A csillagok között lévő részt töröld ki. 
 Az elejére ezt írd: jdbc:
 
