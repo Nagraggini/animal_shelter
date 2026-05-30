@@ -37,7 +37,7 @@ A projekt egy egyszerű "Animal Shelter" alkalmazáson keresztül mutatja be a C
   - [Adatbázis létrehozása a Render.com-on](#adatbázis-létrehozása-a-rendercom-on)
   - [\\dt-vel kilistázzuk a táblát:](#dt-vel-kilistázzuk-a-táblát)
   - [\\d animals-vel a tábla struktúráját láthatod:](#d-animals-vel-a-tábla-struktúráját-láthatod)
-- [application.properties fájl](#applicationproperties-fájl)
+  - [application.properties fájl](#applicationproperties-fájl)
 - [Teljes Flow](#teljes-flow)
 - [Spring Session](#spring-session)
 - [Teszteléshez](#teszteléshez)
@@ -458,7 +458,7 @@ A vs code-ban a pom.xml-hez adjuk hozzá a postgresql drivert. Jobb klikk a pom.
 
 Az application.properties fájlban rendeljük össze a weboldalt a render.com-os adatbázissal.
 
-# application.properties fájl
+## application.properties fájl
 
 src/main/resources/application.properties
 
