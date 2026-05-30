@@ -35,7 +35,7 @@ A projekt egy egyszerű "Animal Shelter" alkalmazáson keresztül mutatja be a C
     - [Windows-on:](#windows-on)
     - [Linux-on:](#linux-on)
   - [Adatbázis létrehozása a Render.com-on](#adatbázis-létrehozása-a-rendercom-on)
-  - [\\dt-vel kilistázzuk a kettő táblát:](#dt-vel-kilistázzuk-a-kettő-táblát)
+  - [\\dt-vel kilistázzuk a táblát:](#dt-vel-kilistázzuk-a-táblát)
   - [\\d animals-vel a tábla struktúráját láthatod:](#d-animals-vel-a-tábla-struktúráját-láthatod)
 - [application.properties fájl](#applicationproperties-fájl)
 - [Teljes Flow](#teljes-flow)
@@ -410,20 +410,20 @@ sudo apt install postgresql
 
 ## Adatbázis létrehozása a Render.com-on
 
-A render.com-on hozz létre egy Postgres-t. A név legyen database. A verzió 16-os, a lényeg hogy egyezzen a gépre feltepített verzióval. Region: EU Instance Type: Free -> Create Database
+A render.com-on hozz létre egy Postgres-t. A név legyen "database". A verzió 16-os, a lényeg hogy egyezzen a gépre feltepített verzióval. Region: EU Instance Type: Free -> Create Database
 
 Miután elkészült szükséged lesz az External Database URL-re, Username, Database, Password-re.
 
 Terminálban, csatlakoztasd Postgres-t a render.com-os adatbázissal:
 psql -h "@-utáni résztől....frankfurt-postgres.render.com-ig" -U "Username" -d "Database"
 Entert nyomj.
-pl.: psql -h dpg-d69k87buibrs739i5fu0-a.frankfurt-postgres.render.com -U database_olpd_user -d database_olpd
+pl.: psql -h dpg-d8d7e5n7f7vs73bsu2ng-a.frankfurt-postgres.render.com -U database_rzzj_user -d database_rzzj
 A jelszónak az oldalon lévő password-t másold be. Nem fogja mutatni. Majd entert nyomj.
 
 Adatbázis létrehozása a terminálban:
 CREATE TABLE animals (uid SERIAL, name VARCHAR(255), weight INTEGER);
 
-## \dt-vel kilistázzuk a kettő táblát:
+## \dt-vel kilistázzuk a táblát:
 
 ```bash
                List of relations
@@ -446,13 +446,13 @@ public | animals | table | database_olpd_user
 
 ```
 
-A "q"-val tudsz kilépni belőle.
+A "q"-val tudsz kilépni belőle. De az alaábbi lekérdezések futtatásához benne kell lenned. 
 
 Így tudsz hozzáadni plussz sort (objektum):
 INSERT INTO animals (name,weight) VALUES ('Cirma',15);
 
 Kilistázás:
-SELECT \* FROM animals;
+SELECT * FROM animals;
 
 A vs code-ban a pom.xml-hez adjuk hozzá a postgresql drivert. Jobb klikk a pom.xml-en -> Add Starts.. -> Postgresql Driver -> Enter -> Proceed.
 
@@ -919,7 +919,7 @@ Adj hozzá új "Repository secret"-eket a Render-en kapott adatok alapján:
 
 Fontos, hogy a változóneveknek is egyezniük kell!
 
-DB_URL: (Pl. jdbc:postgresql://dpg-xxx-a.frankfurt-postgres.render.com/mydb)
+DB_URL: jdbc:postgresql://<host>:<port>/<database> (Pl. jdbc:postgresql://dpg-xxx-a.frankfurt-postgres.render.com/mydb)
 
 DB_USER: (A Render-en megadott user)
 
@@ -1150,6 +1150,7 @@ Terminálban:
 sdk install java 17.0.10-ms
 mvn spring-boot:run 
 
+//A render.com-tól nézd ki az aktuális linket, felhasználónevet és jelszót.
 export DB_URL='jdbc:postgresql://dpg-d69k87buibrs739i5fu0-a.frankfurt-postgres.render.com:5432/database_olpd'
 export DB_USER='database_olpd_user'
 export DB_PASS='sekoojWQ5YUGrgC3080avcnkVvgY4LSQ'
